@@ -1,16 +1,11 @@
-import mongoose from "mongoose";
-mongoose.connect("mongodb+srv://BashDeen:Berrybash419@cluster0.tcy5skl.mongodb.net/");
-import Blog from './model/Blog.js';
-// Create a new blog post and insert into database
-const article = await Blog.create({
-title: 'Awesome Post!',
-slug: 'awesome-post',
-published: true,
-content: 'This is the best post ever',
-tags: ['featured', 'announcement'],
-});
-console.log(article);
-
-article.title = "The Most Awesomest Post!!";
-await article.save();
-console.log(article);
+const express = require('express');
+const mongoose = require('mongoose' );
+const app = express();
+app.listen(3000, () => {
+ console.log(`Server Started at ${ 3000}`)
+})
+mongoose.connect('mongodb://localhost:27017/apiMongoose' );
+// mongodb+srv://BashDeen:Berrybash419@cluster0.tcy5skl.mongodb.net/
+const database = mongoose.connection ;
+const routes = require('./routes/routes');
+app.use('/api', routes)
